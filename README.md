@@ -1,6 +1,6 @@
-# weather_app
+# Skycast
 
-Skycast
+SkyCast is your weather companion, offering a seamless and informative weather forecasting experience. With real-time data and a sleek interface, you can make the most of every day, rain or shine.
 
 ## Getting Started
 
