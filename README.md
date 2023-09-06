@@ -1,6 +1,6 @@
 # weather_app
 
-Weather App
+Skycast
 
 ## Getting Started
 
