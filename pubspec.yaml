@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
   lottie: ^2.6.0
+  get: ^4.6.5
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/weather_anim.json
+     - assets/rainy.png
+     - assets/red_weather_icon.png
+     - assets/icon_petir.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
