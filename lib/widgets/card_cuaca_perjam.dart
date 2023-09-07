@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/utilities/color.dart';
 
 class CardCuacaPerjam extends StatelessWidget {
-  const CardCuacaPerjam({super.key});
+  final String? iconCuaca;
+  final String? suhuCuaca;
+  final String? waktuCuaca;
+
+  const CardCuacaPerjam({
+    super.key,
+    required this.iconCuaca,
+    required this.suhuCuaca,
+    required this.waktuCuaca,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-
+    return Container(
+      height: 50.0,
+      width: 100.0,
+      child: Card(
+        child: Column(
+          children: [
+            Image.asset(iconCuaca!),
+            Text(
+              suhuCuaca!,
+              style: const TextStyle(
+                color: ColorConst.button_color,
+              ),
+            ),
+            Text(
+              waktuCuaca!,
+              style: const TextStyle(
+                color: ColorConst.button_color,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
