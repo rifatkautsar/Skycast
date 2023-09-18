@@ -21,7 +21,7 @@ class CardCuacaPerjam extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Image.asset(iconCuaca!),
+            Image.asset(iconCuaca! ,width: 100.0, height: 60.0,),
             Text(
               suhuCuaca!,
               style: const TextStyle(
