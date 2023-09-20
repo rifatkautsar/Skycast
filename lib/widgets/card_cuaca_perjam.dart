@@ -15,27 +15,25 @@ class CardCuacaPerjam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50.0,
       width: 100.0,
-      child: Card(
-        child: Column(
-          children: [
-            Image.asset(iconCuaca! ,width: 100.0, height: 60.0,),
-            Text(
-              suhuCuaca!,
-              style: const TextStyle(
-                color: ColorConst.button_color,
-              ),
+      child: Column(
+        children: [
+          Image.network(iconCuaca! ,width: 100.0, height: 60.0,),
+          Text(
+            suhuCuaca!,
+            style: const TextStyle(
+              color: ColorConst.button_color,
             ),
-            Text(
-              waktuCuaca!,
-              style: const TextStyle(
-                color: ColorConst.button_color,
-              ),
+          ),
+          Text(
+            waktuCuaca!,
+            style: const TextStyle(
+              color: ColorConst.button_color,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

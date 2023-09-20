@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:weather_app/utilities/TextColor.dart';
@@ -6,6 +7,8 @@ import 'package:weather_app/utilities/color.dart';
 import 'package:weather_app/widgets/appbar.dart';
 import 'package:weather_app/widgets/card_cuaca_perjam.dart';
 import 'package:weather_app/widgets/card_detail_cuaca.dart';
+
+import '../models/weather_model.dart';
 
 class DetailMenuHome extends StatefulWidget {
   final double? celciusCuaca;
@@ -15,6 +18,10 @@ class DetailMenuHome extends StatefulWidget {
   final double? kondisiKecepatan;
   final int? kondisiKabut;
   final String? nama_lokasi;
+  final String? waktuLokal;
+  final String? waktuUpdate;
+  final String? imageCuaca;
+  final List<Hour>? forecastHourList; // Add this line
 
 
   const DetailMenuHome({super.key , required this.celciusCuaca, required this.kondisiCuaca,
@@ -23,6 +30,10 @@ class DetailMenuHome extends StatefulWidget {
     required this.kondisiKecepatan,
     required this.kondisiKabut,
     required this.nama_lokasi,
+    required this.waktuLokal,
+    required this.forecastHourList,
+    required this.waktuUpdate,
+    required this.imageCuaca,
   });
 
   @override
@@ -54,12 +65,12 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Senin, 20 Desember 2021 - 10.30 PM'),
+                    Text(widget.waktuLokal.toString()),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    Lottie.asset(
-                      'assets/weather_anim.json',
+                    Image.network(
+                      widget.imageCuaca!,
                       // Replace with the URL to your Lottie animation JSON file
                       width: 60, // Set the width and height as needed
                       height: 60,
@@ -69,14 +80,14 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    const Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Terakhir update 8.00 PM'),
-                        SizedBox(
+                        Text('Terakhir update ${widget.waktuUpdate}'),
+                        const SizedBox(
                           width: 5.0,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.restart_alt_outlined,
                           color: Colors.white,
                         )
@@ -100,15 +111,21 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                     ),
                     SizedBox(
                       height: 150.0,
-                      child: ListView.builder(
+                      child: ListView.separated(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: widget.forecastHourList!.length,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(width: 10.0),
                         itemBuilder: (BuildContext context, int index) {
-                          return const CardCuacaPerjam(
-                              iconCuaca: 'assets/rainy.png',
-                              suhuCuaca: '17º',
-                              waktuCuaca: '11.00 PM');
+                          Hour hour = widget.forecastHourList![index];
+                          DateTime dateTime = DateTime.parse(hour.time!);
+                          String formattedTime = DateFormat('HH:mm').format(dateTime);
+                          return CardCuacaPerjam(
+                            iconCuaca: hour.condition?.icon,
+                            suhuCuaca: '${hour.tempC}º',
+                            waktuCuaca: formattedTime,
+                          );
                         },
                       ),
                     ),
