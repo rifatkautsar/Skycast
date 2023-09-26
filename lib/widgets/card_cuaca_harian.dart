@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/utilities/color.dart';
+import 'package:weather_app/widgets/custom_image_network.dart';
 
 class CardCuacaHarian extends StatelessWidget {
   final String icon_cuaca;
@@ -22,7 +23,8 @@ class CardCuacaHarian extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: ColorConst.blue_semi,
-        borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
+        borderRadius:
+            BorderRadius.circular(10.0), // Adjust the border radius as needed
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,26 +35,24 @@ class CardCuacaHarian extends StatelessWidget {
             children: [
               ClipOval(
                 child: Container(
-                  width: 50.0,  // Adjust the size of the outer circle
+                  width: 50.0, // Adjust the size of the outer circle
                   height: 50.0, // Adjust the size of the outer circle
                   color: ColorConst.blue_color4,
                   child: Center(
                     child: ClipOval(
                       child: Container(
-                        width: 30, // Adjust the size of the inner circle
-                        height: 30, // Adjust the size of the inner circle
-                        color: Colors.transparent, // Make the inner container transparent
-                        child: Image.network(
-                          icon_cuaca,
-                          width: 30.0, // Adjust the size of the image
-                          height: 30.0, // Adjust the size of the image
-                        ),
-                      ),
+                          width: 30,
+                          height: 30,
+                          color: Colors.transparent,
+                          child: CustomNetworkImage(
+                              imageUrl: icon_cuaca, width: 30.0, height: 30.0)),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 15.0,),
+              const SizedBox(
+                width: 15.0,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
