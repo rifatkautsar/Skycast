@@ -9,7 +9,7 @@ class TextColorBlack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      valueText!,
+      valueText,
       style: const TextStyle(
         fontSize: 15.0,
         color: ColorConst.black_color,
@@ -26,7 +26,7 @@ class TextColorAbu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      valueTextAbu!,
+      valueTextAbu,
       style: TextStyle(
         fontSize: size,
         color: ColorConst.brown,

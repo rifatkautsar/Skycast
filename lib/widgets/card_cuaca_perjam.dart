@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/utilities/color.dart';
+import 'package:weather_app/widgets/custom_image_network.dart';
 
 class CardCuacaPerjam extends StatelessWidget {
   final String? iconCuaca;
@@ -20,7 +21,7 @@ class CardCuacaPerjam extends StatelessWidget {
       width: 100.0,
       child: Column(
         children: [
-          Image.network(iconCuaca! ,width: 100.0, height: 60.0,),
+          CustomNetworkImage(imageUrl: iconCuaca!, width: 100.0, height: 80.0),
           Text(
             suhuCuaca!,
             style: const TextStyle(
