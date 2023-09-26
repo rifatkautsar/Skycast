@@ -42,7 +42,7 @@ class CardCuacaHarian extends StatelessWidget {
                         width: 30, // Adjust the size of the inner circle
                         height: 30, // Adjust the size of the inner circle
                         color: Colors.transparent, // Make the inner container transparent
-                        child: Image.asset(
+                        child: Image.network(
                           icon_cuaca,
                           width: 30.0, // Adjust the size of the image
                           height: 30.0, // Adjust the size of the image

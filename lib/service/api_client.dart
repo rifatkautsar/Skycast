@@ -6,7 +6,7 @@ class ApiClient {
   static const String baseUrl = 'http://api.weatherapi.com/v1';
 
   static Future<http.Response> fetchData(String location) async {
-    String url = '$baseUrl/forecast.json?key=$apiKey&q=$location&aqi=yes&alerts=no';
+    String url = '$baseUrl/forecast.json?key=$apiKey&q=$location&days=7&aqi=yes&alerts=no';
     return await http.get(Uri.parse(url));
   }
 
