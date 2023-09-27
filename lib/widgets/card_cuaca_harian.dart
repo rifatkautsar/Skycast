@@ -45,7 +45,7 @@ class CardCuacaHarian extends StatelessWidget {
                           height: 30,
                           color: Colors.transparent,
                           child: CustomNetworkImage(
-                              imageUrl: icon_cuaca, width: 30.0, height: 30.0)),
+                              imageUrl: icon_cuaca, width: 30.0, height: 30.0, sizeIcon: 30.0,)),
                     ),
                   ),
                 ),

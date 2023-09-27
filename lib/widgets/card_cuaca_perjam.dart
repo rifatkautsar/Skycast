@@ -21,7 +21,7 @@ class CardCuacaPerjam extends StatelessWidget {
       width: 100.0,
       child: Column(
         children: [
-          CustomNetworkImage(imageUrl: iconCuaca!, width: 100.0, height: 80.0),
+          CustomNetworkImage(imageUrl: iconCuaca!, width: 100.0, height: 80.0, sizeIcon: 30.0,),
           Text(
             suhuCuaca!,
             style: const TextStyle(

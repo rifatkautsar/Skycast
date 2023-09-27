@@ -21,11 +21,10 @@ class CardDetailCuaca extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               iconDetailCuaca,
-              size: 24, // Set the size of the icon
+              size: 28,
               color: ColorConst.blue_color3,
             ),
             const SizedBox(

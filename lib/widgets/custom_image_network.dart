@@ -5,11 +5,13 @@ class CustomNetworkImage extends StatelessWidget {
   final String imageUrl;
   final double width;
   final double height;
+  final double sizeIcon;
 
   const CustomNetworkImage({
     required this.imageUrl,
     required this.width,
     required this.height,
+    required this.sizeIcon,
   });
 
   @override
@@ -32,10 +34,10 @@ class CustomNetworkImage extends StatelessWidget {
         }
       },
       errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-        return const Icon(
+        return Icon(
           CupertinoIcons.exclamationmark_circle,
           color: Colors.red,
-          size: 80,
+          size: sizeIcon,
         );
       },
     );
