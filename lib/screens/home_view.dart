@@ -205,7 +205,6 @@ class _HomeViewState extends State<HomeView> {
                                             'Terakhir update ${weatherData.location.localtime}'),
                                         InkWell(
                                           onTap: () async {
-                                            // Show a loading indicator while data is being fetched
                                             setState(() {
                                               isLoading = true;
                                             });
