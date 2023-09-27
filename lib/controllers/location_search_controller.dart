@@ -5,9 +5,14 @@ import '../service/api_client.dart';
 
 class LocationSearchController extends GetxController {
   RxList<LocationSearch> locations = <LocationSearch>[].obs;
+  RxBool isLoading = false.obs;
 
   Future<void> searchLocation(String query) async {
+    isLoading.value = true;
+
     final response = await ApiClient.searchLocation(query);
+
+    isLoading.value = false;
 
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body);
