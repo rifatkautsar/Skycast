@@ -39,6 +39,9 @@ dependencies:
   lottie: ^2.6.0
   get: ^4.6.5
   percent_indicator: ^4.2.3
+  intl: ^0.18.1
+  shimmer: ^3.0.0
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +71,7 @@ flutter:
      - assets/rainy.png
      - assets/red_weather_icon.png
      - assets/icon_petir.png
+     - assets/heavy_rain.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
