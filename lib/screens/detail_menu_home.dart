@@ -1,8 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:weather_app/utilities/TextColor.dart';
 import 'package:weather_app/utilities/color.dart';
 import 'package:weather_app/widgets/appbar.dart';
 import 'package:weather_app/widgets/card_cuaca_perjam.dart';
@@ -21,10 +19,16 @@ class DetailMenuHome extends StatefulWidget {
   final String? waktuLokal;
   final String? waktuUpdate;
   final String? imageCuaca;
-  final List<Hour>? forecastHourList; // Add this line
+  final List<Hour>? forecastHourList;
+  final AirQuality airquality;
+  final double? minTempC;
+  final double? maxTempC;
+  final String? moonPahase;
 
-
-  const DetailMenuHome({super.key , required this.celciusCuaca, required this.kondisiCuaca,
+  const DetailMenuHome({
+    super.key,
+    required this.celciusCuaca,
+    required this.kondisiCuaca,
     required this.kondisiKelembaban,
     required this.kondisiTekanan,
     required this.kondisiKecepatan,
@@ -34,6 +38,10 @@ class DetailMenuHome extends StatefulWidget {
     required this.forecastHourList,
     required this.waktuUpdate,
     required this.imageCuaca,
+    required this.airquality,
+    required this.minTempC,
+    required this.maxTempC,
+    required this.moonPahase,
   });
 
   @override
@@ -45,6 +53,7 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConst.defaultColor,
       appBar: AppbarSkycast(appbarName: widget.nama_lokasi!),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -71,28 +80,15 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                     ),
                     Image.network(
                       widget.imageCuaca!,
-                      // Replace with the URL to your Lottie animation JSON file
-                      width: 60, // Set the width and height as needed
+                      width: 60,
                       height: 60,
                     ),
-                    Text('${widget.celciusCuaca}º C' ?? 'Loading...'),
+                    Text('${widget.celciusCuaca}º C'),
                     Text(widget.kondisiCuaca!),
                     const SizedBox(
                       height: 15.0,
                     ),
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Terakhir update ${widget.waktuUpdate}'),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        const Icon(
-                          Icons.restart_alt_outlined,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
+                    Text('Terakhir update ${widget.waktuUpdate}'),
                   ],
                 ),
               ),
@@ -116,11 +112,12 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                         scrollDirection: Axis.horizontal,
                         itemCount: widget.forecastHourList!.length,
                         separatorBuilder: (BuildContext context, int index) =>
-                            SizedBox(width: 10.0),
+                            const SizedBox(width: 10.0),
                         itemBuilder: (BuildContext context, int index) {
                           Hour hour = widget.forecastHourList![index];
                           DateTime dateTime = DateTime.parse(hour.time!);
-                          String formattedTime = DateFormat('HH:mm').format(dateTime);
+                          String formattedTime =
+                              DateFormat('HH:mm').format(dateTime);
                           return CardCuacaPerjam(
                             iconCuaca: hour.condition?.icon,
                             suhuCuaca: '${hour.tempC}º',
@@ -141,73 +138,58 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
-                    Row(
+                    Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircularPercentIndicator(
-                            radius: 40.0,
-                            lineWidth: 3.0,
-                            animation: true,
-                            percent: 0.12,
-                            reverse: true,
-                            center: const Text(
-                              "12",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.0,
-                                  color: Colors.green),
-                            ),
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: Colors.green,
-                          ),
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            TextColorBlack(valueText: 'Aqi - Sangat Baik'),
-                            SizedBox(
-                              height: 2.0,
+                            CardDetailCuaca(
+                                iconDetailCuaca: CupertinoIcons.thermometer,
+                                dataDetailCuaca: '${widget.maxTempC}° / ${widget.minTempC}°',
+                                deskripsiDetailCuaca: 'High / Low'
                             ),
-                            SizedBox(
-                              width: 250.0,
-                              child: TextColorAbu(
-                                  valueTextAbu:
-                                      'Kualitas udara di daerahmu untuk saat inisangat baik. Tidak ada pencemaran udara yang menyebabkan berbagai penyakit.', size: 12.0,),
-                            ),
+                            CardDetailCuaca(
+                                iconDetailCuaca: CupertinoIcons.moon_stars,
+                                dataDetailCuaca:
+                                widget.moonPahase!,
+                                deskripsiDetailCuaca: 'Moon Phase'),
                           ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    Row(
-                      children: [
-                        Column(
+                        Row(
                           children: [
-                            CardDetailCuaca(
-                                iconDetailCuaca: Icons.cloud,
-                                dataDetailCuaca: '${widget.kondisiKelembaban!} %',
-                                deskripsiDetailCuaca: 'Kelembaban'),
-                            CardDetailCuaca(
-                                iconDetailCuaca: Icons.wind_power_rounded,
-                                dataDetailCuaca: '${widget.kondisiTekanan!} pHa',
-                                deskripsiDetailCuaca: 'Tekanan Udara'),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            CardDetailCuaca(
-                                iconDetailCuaca: Icons.cloud,
-                                dataDetailCuaca: '${widget.kondisiKecepatan!} km/h',
-                                deskripsiDetailCuaca: 'Kecepatan Angin'),
-                            CardDetailCuaca(
-                                iconDetailCuaca: Icons.cloud,
-                                dataDetailCuaca: '${widget.kondisiKabut!} %',
-                                deskripsiDetailCuaca: 'Kabut'),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  CardDetailCuaca(
+                                      iconDetailCuaca: CupertinoIcons.drop_fill,
+                                      dataDetailCuaca:
+                                          '${widget.kondisiKelembaban!} %',
+                                      deskripsiDetailCuaca: 'Kelembaban'),
+                                  CardDetailCuaca(
+                                      iconDetailCuaca: CupertinoIcons.gauge,
+                                      dataDetailCuaca:
+                                          '${widget.kondisiTekanan!} pHa',
+                                      deskripsiDetailCuaca: 'Tekanan Udara'),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  CardDetailCuaca(
+                                      iconDetailCuaca: CupertinoIcons.wind,
+                                      dataDetailCuaca:
+                                          '${widget.kondisiKecepatan!} km/h',
+                                      deskripsiDetailCuaca: 'Kecepatan Angin'),
+                                  CardDetailCuaca(
+                                      iconDetailCuaca: CupertinoIcons.cloud_fog,
+                                      dataDetailCuaca:
+                                          '${widget.kondisiKabut!} %',
+                                      deskripsiDetailCuaca: 'Kabut'),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -222,3 +204,49 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
     );
   }
 }
+
+/*
+Widget dialogDetailCuaca(BuildContext context) {
+  return GestureDetector(
+    onVerticalDragDown: (_) {}, // Handle drag down
+    onVerticalDragUpdate: (details) {
+      // Handle drag update (moving)
+      double dy = details.localPosition.dy;
+      if (dy < 0) {
+        // If the user drags upwards (negative direction),
+        // pop the BottomSheet.
+        Navigator.of(context).pop();
+      }
+    },
+    child: Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(15.0),
+      child: Column(
+        children: [
+          Container(
+            height: 5,
+            width: 50,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+          // Add other content of the BottomSheet below
+          ListTile(
+            title: Text('Option 1'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('Option 2'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    ),
+  );
+}
+*/
