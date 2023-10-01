@@ -140,57 +140,49 @@ class _DetailMenuHomeState extends State<DetailMenuHome> {
                     const SizedBox(
                       height: 5.0,
                     ),
-                    Column(
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            CardDetailCuaca(
-                                iconDetailCuaca: CupertinoIcons.thermometer,
-                                dataDetailCuaca: '${widget.maxTempC}° / ${widget.minTempC}°',
-                                deskripsiDetailCuaca: 'High / Low'
-                            ),
-                            CardDetailCuaca(
-                                iconDetailCuaca: CupertinoIcons.moon_stars,
-                                dataDetailCuaca:
-                                widget.moonPahase!,
-                                deskripsiDetailCuaca: 'Moon Phase'),
-                          ],
+                        Expanded(
+                          child: Column(
+                            children: [
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.drop_fill,
+                                  dataDetailCuaca:
+                                      '${widget.kondisiKelembaban!} %',
+                                  deskripsiDetailCuaca: 'Kelembaban'),
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.gauge,
+                                  dataDetailCuaca:
+                                      '${widget.kondisiTekanan!} pHa',
+                                  deskripsiDetailCuaca: 'Tekanan Udara'),
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.moon_stars,
+                                  dataDetailCuaca:
+                                  widget.moonPahase!,
+                                  deskripsiDetailCuaca: 'Moon Phase'),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  CardDetailCuaca(
-                                      iconDetailCuaca: CupertinoIcons.drop_fill,
-                                      dataDetailCuaca:
-                                          '${widget.kondisiKelembaban!} %',
-                                      deskripsiDetailCuaca: 'Kelembaban'),
-                                  CardDetailCuaca(
-                                      iconDetailCuaca: CupertinoIcons.gauge,
-                                      dataDetailCuaca:
-                                          '${widget.kondisiTekanan!} pHa',
-                                      deskripsiDetailCuaca: 'Tekanan Udara'),
-                                ],
+                        Expanded(
+                          child: Column(
+                            children: [
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.thermometer,
+                                  dataDetailCuaca: '${widget.maxTempC}° / ${widget.minTempC}°',
+                                  deskripsiDetailCuaca: 'High / Low'
                               ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  CardDetailCuaca(
-                                      iconDetailCuaca: CupertinoIcons.wind,
-                                      dataDetailCuaca:
-                                          '${widget.kondisiKecepatan!} km/h',
-                                      deskripsiDetailCuaca: 'Kecepatan Angin'),
-                                  CardDetailCuaca(
-                                      iconDetailCuaca: CupertinoIcons.cloud_fog,
-                                      dataDetailCuaca:
-                                          '${widget.kondisiKabut!} %',
-                                      deskripsiDetailCuaca: 'Kabut'),
-                                ],
-                              ),
-                            ),
-                          ],
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.wind,
+                                  dataDetailCuaca:
+                                      '${widget.kondisiKecepatan!} km/h',
+                                  deskripsiDetailCuaca: 'Kecepatan Angin'),
+                              CardDetailCuaca(
+                                  iconDetailCuaca: CupertinoIcons.cloud_fog,
+                                  dataDetailCuaca:
+                                      '${widget.kondisiKabut!} %',
+                                  deskripsiDetailCuaca: 'Kabut'),
+                            ],
+                          ),
                         ),
                       ],
                     ),
