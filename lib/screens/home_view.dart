@@ -77,7 +77,17 @@ class _HomeViewState extends State<HomeView> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const LoadingHomeShimmer();
             } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return Center(
+                  child: SafeArea(
+                    child: Text(
+                'Error: ${snapshot.error}',
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                ),
+              ),
+                  ));
             } else {
               return SingleChildScrollView(
                 child: SafeArea(
@@ -300,8 +310,7 @@ class _HomeViewState extends State<HomeView> {
                           height: 90.0,
                           decoration: BoxDecoration(
                             color: ColorConst.pink_color.withOpacity(0.13),
-                            borderRadius: BorderRadius.circular(
-                                10.0),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: ClipRRect(
                               child: Stack(
