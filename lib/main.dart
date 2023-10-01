@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/screens/home_view.dart';
@@ -18,8 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        textTheme:
-            GoogleFonts.robotoTextTheme().apply(bodyColor: Colors.white),
+        textTheme: GoogleFonts.robotoTextTheme().apply(bodyColor: Colors.white),
       ),
       home: const HomeView(),
     );
